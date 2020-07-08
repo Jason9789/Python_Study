@@ -1,12 +1,12 @@
-# 강아지 딕셔너리 생성
 dog_list = []
-dog = {}
 
 for num in range(3):
-    dog['name'] = input("강아지 이름 : ")
-    dog['age'] = int(input("강아지 나이 : "))
-    dog['king'] = input("강아지 종류 : ")
-    dog_list.append(dict(dog))
+    dog_dict = {}
+
+    dog_dict['name'] = input("강아지 이름 : ")
+    dog_dict['age'] = int(input("강아지 나이 : "))
+    dog_dict['king'] = input("강아지 종류 : ")
+    dog_list.append(dict(dog_dict))
 
 print("리스트 내용")
 for num in range(len(dog_list)):
@@ -14,7 +14,7 @@ for num in range(len(dog_list)):
 
 
 print("나이가 3살 이상인 강아지")
-for dog in dog_list:
-    if dog['age'] >= 3:
-        print(dog)
+for dog_dict in dog_list:
+    if dog_dict['age'] >= 3:
+        print(dog_dict)
 
