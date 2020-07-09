@@ -49,15 +49,15 @@ while i < len(test[0]):
         # print(len(stack))
         print(stack)
 
-    # elif token == ')':
-    #     # print(stack)
-    #     # check = stack.pop()
-    #     # 기호가 ( 가 아니면 꺼낸 기호를 다시 stack에 넣는다.
-    #     # python에는 top이 없기 때문에 [-1]로 top을 체크한다.
-    #     while stack[-1] != '(':
-    #         test2.append(stack.pop())
-    #     if stack[-1] == '(':
-    #         stack.pop()
+    elif token == ')':
+        # print(stack)
+        # check = stack.pop()
+        # 기호가 ( 가 아니면 꺼낸 기호를 다시 stack에 넣는다.
+        # python에는 top이 없기 때문에 [-1]로 top을 체크한다.
+        while stack[-1] != '(':
+            test2.append(stack.pop())
+        if stack[-1] == '(':
+            stack.pop()
 
     elif token in '+-*/':
         if len(stack) != 0:
@@ -83,11 +83,11 @@ while i < len(test[0]):
     #     stack.append(token)
         test2.append(token)
 
-    if len(stack) != 0:
-        while len(stack) != 0:
-            test2.append(stack.pop())
-
     i += 1
+
+if len(stack) != 0:
+    while len(stack) != 0:
+        test2.append(stack.pop())
 
 print()
 print(test)
