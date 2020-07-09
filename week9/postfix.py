@@ -89,8 +89,8 @@ if len(stack) != 0:
     while len(stack) != 0:
         test2.append(stack.pop())
 
-print()
-print(test)
+print("\n===================")
+# print(test)
 print(test2)
 print(stack)
-print(len(stack))
+# print(len(stack))
