@@ -19,14 +19,10 @@ infix = [
     ['((9*2)-(3*((2+5)/7)))'],
     ['((9*2)-((3*(2+5))/7))']
 ]
-postfix = []
+stack = []      # stack list
+# postfix = []    # output
 
-test = ['((8-6)*(4+(9/3)))']
-test2 = []
-stack = []
-
-# print(len(test[0]))
-
+# 연산자 우선 순위 체크
 prio = {}
 prio['('] = 0
 prio['+'] = 1
@@ -34,63 +30,45 @@ prio['-'] = 1
 prio['*'] = 2
 prio['/'] = 2
 
-i = 0
-while i < len(test[0]):
-    # print(test[0][i])
-    token = test[0][i]
-    # 숫자일 경우 output에 바로 저장
-    if token.isdigit():
-        test2.append(token)
+for i in infix:
+    postfix = []    # postfix로 변환하여 output 저장 후 출력
+    test = i
 
-    # 기호일 경우
-    elif token == '(':
-        stack.append(token)
-        print(stack[-1])
-        # print(len(stack))
-        print(stack)
+    j = 0
+    while j < len(test[0]):
+        token = test[0][j]
 
-    elif token == ')':
-        # print(stack)
-        # check = stack.pop()
-        # 기호가 ( 가 아니면 꺼낸 기호를 다시 stack에 넣는다.
-        # python에는 top이 없기 때문에 [-1]로 top을 체크한다.
-        while stack[-1] != '(':
-            test2.append(stack.pop())
-        if stack[-1] == '(':
-            stack.pop()
+        if token.isdigit():
+            postfix.append(token)
 
-    elif token in '+-*/':
-        if len(stack) != 0:
-            print(len(stack))
-            # check = stack.pop()
-
-            if stack[-1] == '(':
-                stack.append(token)
-            else:
-                # stack.append(check)
-                # print(stack)
-                # print(check)
-                while prio[token] <= prio[stack[-1]]:
-                    test2.append(stack.pop())
-                    # test2.append(check)
-                    if len(stack) == 0: break
-                stack.append(token)
-                # test2.append(token)
-        else:
+        elif token == '(':
             stack.append(token)
-    #         test2.append(token)
-    else:
-    #     stack.append(token)
-        test2.append(token)
 
-    i += 1
+        elif token == ')':
+            while stack[-1] != '(':
+                a = stack.pop()
+                postfix.append(a)
+            if stack[-1] == '(':
+                stack.pop()
 
-if len(stack) != 0:
-    while len(stack) != 0:
-        test2.append(stack.pop())
+        elif token in '+-*/':
+            if len(stack) != 0:
+                if stack[-1] == '(':
+                    stack.append(token)
+                else:
+                    while prio[token] <= prio[stack[-1]]:
+                        postfix.append(stack.pop())
+                        if len(stack) == 0: break
+                    stack.append(token)
+            else:
+                postfix.append(token)
+        else:
+            postfix.append(token)
 
-print("\n===================")
-# print(test)
-print(test2)
-print(stack)
-# print(len(stack))
+        j += 1
+
+    if len(stack):
+        while len(stack) != 0:
+            postfix.append(stack.pop())
+
+    print(test[0], "=", "".join(postfix))
