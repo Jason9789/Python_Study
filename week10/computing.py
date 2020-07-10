@@ -26,6 +26,7 @@ def computing(num1, num2):
         div = num1 // num2
 
     dic = {'합' : sum, '차' : sub, '곱' : mul, '몫' : div}
+    print("num1 = %d num2 = %d" %(num1, num2))
 
     for key, value in dic.items():
         print(key, ":", value, " ", end='')
