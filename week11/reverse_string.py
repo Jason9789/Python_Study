@@ -7,7 +7,5 @@ def reverse_string(original, i):
         reverse_string(original, i-1)
 
 
-
-
 original = input("문자열 입력 : ")
 reverse_string(original, -1)
