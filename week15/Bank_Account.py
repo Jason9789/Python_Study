@@ -1,5 +1,3 @@
-
-
 class BankAccount:
 
     def __init__(self, name, number, balance=0):
@@ -36,22 +34,17 @@ class BankAccount:
 # 저축 예금
 class SavingAccount(BankAccount):
     # 객체 갯수
-    __counter = 0
     counter = 0
-    passbook_number = ""
 
     def __init__(self, name, balance, rate):
-        super().__init__(name, self.get_number(), balance)
+        SavingAccount.counter += 1
+        super().__init__(name, "01-{:03d}".format(SavingAccount.counter), balance)
         self.__rate = rate
         self.__counter = SavingAccount.counter + 1
-        SavingAccount.counter += 1
 
     def disp(self):
-        return f"name : {self.get_name()} number : {self.get_number()} balance : {self.get_balance()} interest : {self.get_rate()}"
-
-    def get_number(self):
-        passbook_number = "01-" + "%03d" % self.__counter
-        return passbook_number
+        return f"name : {self.get_name()} number : {self.get_number()} " \
+            f"balance : {self.get_balance()} interest : {self.get_rate()}"
 
     def get_rate(self):
         return self.__rate
@@ -64,22 +57,17 @@ class SavingAccount(BankAccount):
 
 # # 당좌 예금
 class CheckingAccount(BankAccount):
-    __counter = 0
     counter = 0
-    passbook_number = ""
 
     def __init__(self, name, balance, fee):
-        super().__init__(name, self.get_number(), balance)
+        CheckingAccount.counter += 1
+        super().__init__(name, "02-{:03d}".format(CheckingAccount.counter), balance)
         self.__fee = fee
         self.__counter = CheckingAccount.counter + 1
-        CheckingAccount.counter += 1
 
     def disp(self):
-        return f"name : {self.get_name()} number : {self.get_number()} balance : {self.get_balance()} fee : {self.get_fee()}"
-
-    def get_number(self):
-        passbook_number = "02-" + "%03d" % CheckingAccount.counter
-        return passbook_number
+        return f"name : {self.get_name()} number : {self.get_number()} " \
+            f"balance : {self.get_balance()} fee : {self.get_fee()}"
 
     def get_fee(self):
         return self.__fee
@@ -93,17 +81,10 @@ class CheckingAccount(BankAccount):
 
 
 def main():
-    account = []
+    account = [SavingAccount("김철수", 10000, 0.05), SavingAccount("이영희", 200000, 0.03),
+               CheckingAccount("홍길동", 2000000, 30000)]
 
     print("-" * 60)
-    p1 = SavingAccount("김철수", 10000, 0.05)
-    p2 = SavingAccount("이영희", 200000, 0.03)
-    p3 = CheckingAccount("홍길동", 2000000, 30000)
-
-    account.append(p1)
-    account.append(p2)
-    account.append(p3)
-
     print("김철수, 이영희, 홍길동 통장 출력")
 
     # 각 통장 정보 출력
@@ -142,6 +123,7 @@ def main():
 
     # 이자 지급 / 당좌수표 발행
     print("-" * 60)
+    print("이자 지급 / 당좌 수표 발행")
     print("계산 전")
     for person in account:
         print(person.disp())
