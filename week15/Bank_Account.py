@@ -106,8 +106,9 @@ def main():
 
     print("김철수, 이영희, 홍길동 통장 출력")
 
-    for i in account:
-        print(i.disp())
+    # 각 통장 정보 출력
+    for person in account:
+        print(person.disp())
 
     # 김철수 50,000 입금 / 100,000 출금
     print("-" * 60)
@@ -142,25 +143,25 @@ def main():
     # 이자 지급 / 당좌수표 발행
     print("-" * 60)
     print("계산 전")
-    for i in account:
-        print(i.disp())
+    for person in account:
+        print(person.disp())
 
     print("\n계산 후")
 
-    for i in account:
+    for person in account:
         # account 의 종류가 SavingAccount 인지 CheckingAccount 인지 확인
-        if isinstance(i, SavingAccount):
-            i.cal_interest()    # 이자 계산
-            print(i.disp())
+        if isinstance(person, SavingAccount):
+            person.cal_interest()    # 이자 계산
+            print(person.disp())
 
-        elif isinstance(i, CheckingAccount):
-            if i.issue_check(1000000) == 1:
-                print(i.disp())
+        elif isinstance(person, CheckingAccount):
+            if person.issue_check(1000000) == 1:
+                print(person.disp())
             else:
                 print("잔액이 부족합니다")
-                print(i.disp())
+                print(person.disp())
 
-
+    print("-" * 60)
 
 
 main()
